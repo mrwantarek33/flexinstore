@@ -355,17 +355,17 @@ ar:{
   h1a:"مصنوع", h1b:"عشان يتشاف.",
   hero_p:"تيشرتات جيم كومبريشن بتثبت على جسمك وبتتنفس معاك. من اللحظة اللي بتدخل فيها، الكل عارف إنك وصلت.",
   shop:"تسوّق دلوقتي",
-  products:"الكوليكشن", products_sub:"تصميمين. صفر تنازلات.",
+  products:"الكوليكشن", products_sub:"",
   f1t:"خامة سريعة الجفاف", f1d:"للتمرين الطويل من غير ما تحس بيها",
   f2t:"قصة كومبريشن", f2d:"بتبرز العضلات وبتثبت مكانها",
   f3t:"الدفع عند الاستلام", f3d:"اطلب وادفع لما توصلك",
   size:"المقاس", add:"أضف للسلة",
   about:"من نحن",
   about_q1:"إحنا مش بنحاول نثبت حاجة.", about_q2:"إحنا واثقين.",
-  about_1:"FLEXIN اتولد من فكرة واحدة: اللي بيتمرن بجد مش محتاج يشرح نفسه. بيدخل الجيم وهو عارف قيمة اللي بيعمله، وعارف إن شكله بيتكلم قبله.",
-  about_2:"عشان كده كل تيشرت عندنا بنختاره بعين صعبة الإرضاء. خامة بتستحمل أقسى تمرينة، قصة بتتحط على جسمك زي ما هو محتاجها، وتفاصيل بتتشاف من غير ما تلفت نظر لنفسها. ومش بنطرح حاجة إلا لما نكون متأكدين إنها تستاهل اسمنا.",
-  about_3:"اللي بيلبس FLEXIN مش بيدوّر على انتباه، هو بيجيله لوحده.",
-  sig:"FLEXIN — مصنوع عشان يتشاف",
+  about_1:"FLEXIN مش لبس جيم عادي، ده لبس واحد عارف هو رايح فين.",
+  about_2:"بنختار كل تيشرت بعناية: خامة تستحمل، قصة تثبت على جسمك، وتصميم يتشاف من أول نظرة.",
+  about_3:"FLEXIN مصنوع عشان يتشاف",
+  sig:"",
   sizes_t:"جدول المقاسات", th_size:"المقاس", th_chest:"الصدر (سم)", th_weight:"الوزن التقريبي (كجم)",
   foot:"تيشرتات جيم كومبريشن للي واثق من نفسه.",
   your_cart:"سلتك", subtotal:"المجموع", shipping:"الشحن", ship_note:"بيتحدد عند الطلب حسب المحافظة", total:"إجمالي المنتجات",
@@ -381,17 +381,17 @@ en:{
   h1a:"Built to", h1b:"be seen.",
   hero_p:"Compression gym tees that lock onto your frame and breathe with you. The moment you walk in, everyone knows you've arrived.",
   shop:"Shop now",
-  products:"The Drop", products_sub:"Two designs. Zero compromise.",
+  products:"The Drop", products_sub:"",
   f1t:"Quick-dry fabric", f1d:"Made for long sessions, felt by no one",
   f2t:"Compression fit", f2d:"Sharpens your build and stays put",
   f3t:"Cash on delivery", f3d:"Order now, pay when it arrives",
   size:"Size", add:"Add to cart",
   about:"About us",
   about_q1:"We're not trying to prove anything.", about_q2:"We're confident.",
-  about_1:"FLEXIN was born from one idea: someone who trains hard doesn't need to explain themselves. They walk into the gym knowing what they're worth, and that how they look speaks first.",
-  about_2:"That's why every tee we make is picked with a hard-to-please eye. Fabric that survives your toughest session, a cut that sits on your body exactly the way it should, and details you notice without them begging for attention. We release nothing unless we're sure it deserves the name.",
-  about_3:"Whoever wears FLEXIN isn't chasing attention. It comes to them.",
-  sig:"FLEXIN — Built to be seen",
+  about_1:"FLEXIN isn't ordinary gym wear. It's for someone who knows where they're going.",
+  about_2:"We pick every tee with care: fabric that lasts, a cut that locks onto your body, and a design that gets noticed at first glance.",
+  about_3:"FLEXIN. Built to be seen.",
+  sig:"",
   sizes_t:"Size guide", th_size:"Size", th_chest:"Chest (cm)", th_weight:"Approx. weight (kg)",
   foot:"Compression gym tees for the ones who know their worth.",
   your_cart:"Your cart", subtotal:"Subtotal", shipping:"Shipping", ship_note:"Set on order, by governorate", total:"Products total",
@@ -429,7 +429,7 @@ function applyLang(){
 }
 
 function marquee(){
-  const words = ["FLEXIN","BUILT TO BE SEEN","DROP 01","COMPRESSION FIT","QUICK-DRY","NO COMPROMISE"];
+  const words = ["FLEXIN","BUILT TO BE SEEN","DROP 01","COMPRESSION FIT","QUICK-DRY"];
   const one = words.map(w => `<span>${w}</span><span class="d">/</span>`).join("");
   $("#track").innerHTML = one.repeat(4);
 }
