@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FLEXIN — Product</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--s1:#0a0a0a;--line:#1e1e1e;--line2:#2c2c2c;--g2:#6e6e6e;--g3:#a6a6a6;--fg:#fff;--ease:cubic-bezier(.2,.7,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--fg);font-family:'Inter','Cairo',sans-serif;line-height:1.65}html[lang=ar] body{font-family:'Cairo','Inter',sans-serif}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}img{display:block;max-width:100%}.wrap{max-width:1180px;margin:auto;padding:0 22px}
+.top{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.top img{height:28px}.back{color:var(--g3);font-size:14px}.back:hover{color:#fff}
+.product{display:grid;grid-template-columns:1fr 1fr;gap:60px;padding:55px 0 80px;align-items:start}.photo{background:#fff;border-radius:8px;min-height:600px;display:grid;place-items:center;position:sticky;top:20px}.photo img{width:82%;filter:drop-shadow(0 25px 28px rgba(0,0,0,.22))}.info{padding-top:20px}.eyebrow{color:var(--g2);letter-spacing:.18em;font-size:12px;text-transform:uppercase;margin-bottom:15px}.title{font-family:'Archivo Black','Cairo',sans-serif;font-size:clamp(38px,5vw,68px);line-height:1.05;margin-bottom:18px}.price{font-size:28px;font-weight:700;margin-bottom:22px}.old{font-size:16px;color:var(--g2);text-decoration:line-through;margin-inline-start:12px;font-weight:400}.desc{color:var(--g3);font-size:15px;margin-bottom:32px;max-width:520px}.label{font-size:13px;color:var(--g3);margin:22px 0 10px}.options{display:flex;gap:9px;flex-wrap:wrap}.option{min-width:58px;height:46px;padding:0 18px;background:transparent;color:#fff;border:1px solid var(--line2);border-radius:3px}.option.on{background:#fff;color:#000;border-color:#fff}.option.color{display:flex;align-items:center;gap:8px}.dot{width:14px;height:14px;border-radius:50%;background:#000;border:1px solid #777}.add{width:100%;margin-top:28px;background:#fff;color:#000;border:1px solid #fff;border-radius:4px;padding:16px;font-weight:700}.add:hover{background:transparent;color:#fff}.notice{min-height:22px;color:var(--g3);font-size:13px;margin-top:12px;text-align:center}
+.reviews{border-top:1px solid var(--line);padding:75px 0}.reviews h2{font-size:clamp(32px,5vw,55px);line-height:1;margin-bottom:35px}.review-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px}.form{border:1px solid var(--line);padding:25px}.form input,.form textarea{width:100%;background:#050505;color:#fff;border:1px solid var(--line2);padding:13px;border-radius:3px;margin-bottom:12px;font:inherit}.form textarea{height:120px;resize:vertical}.stars{display:flex;gap:6px;margin-bottom:12px;direction:ltr}.star{background:none;border:0;color:#555;font-size:25px;padding:0}.star.on{color:#fff}.submit{background:#fff;color:#000;border:1px solid #fff;padding:12px 22px;border-radius:3px;font-weight:700}.reviews-list{display:flex;flex-direction:column;gap:14px}.review{border-bottom:1px solid var(--line);padding:0 0 18px}.review-top{display:flex;justify-content:space-between;gap:15px}.review-name{font-weight:700}.review-stars{letter-spacing:2px}.review-date{color:var(--g2);font-size:11px}.review p{color:var(--g3);margin-top:7px}.empty{color:var(--g2);padding:30px 0}
+footer{border-top:1px solid var(--line);padding:35px 0;color:var(--g2);font-size:13px;text-align:center}
+@media(max-width:850px){.product{grid-template-columns:1fr;gap:30px;padding-top:25px}.photo{position:relative;top:auto;min-height:400px}.info{padding-top:0}.review-grid{grid-template-columns:1fr;gap:40px}.title{font-size:46px}}
+</style>
+</head>
+<body>
+<header class="top wrap"><a href="index.html#products" class="back">← <span id="back">المنتجات</span></a><a href="index.html"><img src="flexin-logo.png" alt="FLEXIN"></a><a href="index.html?cart=1" class="back">🛒 <span id="cartText">السلة</span></a></header>
+<main class="wrap">
+<section class="product">
+<div class="photo"><img id="productImg" src="" alt=""></div>
+<div class="info">
+<div class="eyebrow">FLEXIN / THE DROP</div>
+<h1 class="title" id="productName"></h1>
+<div class="price" id="price"></div>
+<p class="desc" id="desc"></p>
+<div class="label" id="sizeLabel">المقاس</div><div class="options" id="sizes"></div>
+<div class="label" id="colorLabel">اللون</div><div class="options" id="colors"></div>
+<button class="add" id="add">أضف للسلة</button><div class="notice" id="notice"></div>
+</div>
+</section>
+<section class="reviews">
+<h2 id="reviewsTitle">آراء العملاء</h2>
+<div class="review-grid">
+<div class="form">
+<input id="reviewName" placeholder="اسمك">
+<div class="stars" id="stars"><button class="star" data-star="1">★</button><button class="star" data-star="2">★</button><button class="star" data-star="3">★</button><button class="star" data-star="4">★</button><button class="star" data-star="5">★</button></div>
+<textarea id="reviewText" placeholder="اكتب رأيك في المنتج..."></textarea>
+<button class="submit" id="submitReview">إرسال التقييم</button>
+</div>
+<div><div id="reviewList"></div></div>
+</div>
+</section>
+</main>
+<footer>© <span id="year"></span> FLEXIN</footer>
+<script>
+const CONFIG={products:[
+{id:'bat',name:'Bat T-shirt',price:220,oldPrice:300,img:'bat.png',desc:{ar:'تيشرت كومبريشن أسود بطباعة بات بيضاء.',en:'Black compression tee with a white bat print.'},colors:[{ar:'أسود',en:'Black',value:'Black'}]},
+{id:'spider',name:'Spider T-shirt',price:220,oldPrice:300,img:'spider.png',desc:{ar:'تيشرت كومبريشن أسود بطباعة سبايدر بيضاء.',en:'Black compression tee with a white spider print.'},colors:[{ar:'أسود',en:'Black',value:'Black'}]}
+],sizes:['S','M','L','XL']};
+const lang=localStorage.getItem('flexin_lang')||'ar';document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+const id=new URLSearchParams(location.search).get('p')||'bat';const p=CONFIG.products.find(x=>x.id===id)||CONFIG.products[0];let selectedSize='';let selectedColor=p.colors[0].value;let rating=0;
+const $=s=>document.querySelector(s), fmt=n=>(lang==='ar'?n.toLocaleString('ar-EG'):n.toLocaleString('en-US'))+' '+(lang==='ar'?'ج.م':'EGP');
+$('#productImg').src=p.img;$('#productImg').alt=p.name;$('#productName').textContent=p.name;$('#price').innerHTML=fmt(p.price)+(p.oldPrice?`<s class="old">${fmt(p.oldPrice)}</s>`:'');$('#desc').textContent=p.desc[lang];$('#year').textContent=new Date().getFullYear();
+$('#sizes').innerHTML=CONFIG.sizes.map(s=>`<button class="option" data-size="${s}">${s}</button>`).join('');$('#colors').innerHTML=p.colors.map(c=>`<button class="option color on" data-color="${c.value}"><span class="dot"></span>${c[lang]}</button>`).join('');
+$('#sizes').onclick=e=>{const b=e.target.closest('[data-size]');if(!b)return;selectedSize=b.dataset.size;document.querySelectorAll('[data-size]').forEach(x=>x.classList.remove('on'));b.classList.add('on')};
+$('#colors').onclick=e=>{const b=e.target.closest('[data-color]');if(!b)return;selectedColor=b.dataset.color;document.querySelectorAll('[data-color]').forEach(x=>x.classList.remove('on'));b.classList.add('on')};
+$('#add').onclick=()=>{if(!selectedSize){$('#notice').textContent=lang==='ar'?'اختار المقاس الأول':'Pick a size first';return}let cart=JSON.parse(localStorage.getItem('flexin_cart')||'[]');const f=cart.find(x=>x.id===p.id&&x.size===selectedSize&&x.color===selectedColor);f?f.qty++:cart.push({id:p.id,size:selectedSize,color:selectedColor,qty:1});localStorage.setItem('flexin_cart',JSON.stringify(cart));$('#notice').textContent=lang==='ar'?'اتضاف للسلة ✓':'Added to cart ✓'};
+$('#stars').onclick=e=>{const b=e.target.closest('[data-star]');if(!b)return;rating=+b.dataset.star;document.querySelectorAll('.star').forEach(x=>x.classList.toggle('on',+x.dataset.star<=rating))};
+function reviews(){return JSON.parse(localStorage.getItem('flexin_reviews_'+p.id)||'[]')}
+function renderReviews(){const list=reviews();$('#reviewList').innerHTML=list.length?list.slice().reverse().map(r=>`<div class="review"><div class="review-top"><span class="review-name">${escapeHtml(r.name)}</span><span class="review-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</span></div><div class="review-date">${escapeHtml(r.date)}</div><p>${escapeHtml(r.text)}</p></div>`).join(''):`<div class="empty">${lang==='ar'?'لسه مفيش تقييمات — كن أول واحد يكتب رأيه.':'No reviews yet — be the first to review.'}</div>`}
+function escapeHtml(s){return String(s).replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]))}
+$('#submitReview').onclick=()=>{const name=$('#reviewName').value.trim(),text=$('#reviewText').value.trim();if(!name||!text||!rating){alert(lang==='ar'?'اكتب اسمك، اختار تقييم، واكتب رأيك.':'Enter your name, choose a rating, and write your review.');return}const list=reviews();list.push({name,text,rating,date:new Date().toLocaleDateString(lang==='ar'?'ar-EG':'en-US')});localStorage.setItem('flexin_reviews_'+p.id,JSON.stringify(list));$('#reviewName').value='';$('#reviewText').value='';rating=0;document.querySelectorAll('.star').forEach(x=>x.classList.remove('on'));renderReviews()};
+renderReviews();
+</script>
+</body>
+</html>
