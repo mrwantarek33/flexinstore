@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FLEXIN — Product</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--line:#222;--line2:#2c2c2c;--muted:#999;--fg:#fff;--ease:cubic-bezier(.2,.7,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:Cairo,Inter,sans-serif;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:1100px;margin:auto;padding:0 22px}
+
+/* header */
+.top{height:62px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.top img{height:28px;width:auto}
+.tools{display:flex;gap:10px;align-items:center}
+.back{border:1px solid #333;padding:8px 15px;border-radius:3px;font-size:13px;white-space:nowrap}
+.langbtn{background:transparent;color:var(--fg);border:1px solid var(--line2);border-radius:99px;padding:6px 14px;font-size:12px;font-weight:600;letter-spacing:.08em;cursor:pointer}
+.cartlink{background:#fff;color:#000;border-radius:99px;padding:8px 18px;font-weight:700;font-size:13px;display:flex;align-items:center;gap:8px}
+.cartlink b{display:grid;place-items:center;min-width:20px;height:20px;border-radius:99px;background:#000;color:#fff;font-size:11px}
+@keyframes shake{0%,100%{transform:none}15%{transform:translateX(-5px) rotate(-8deg)}35%{transform:translateX(5px) rotate(7deg)}55%{transform:translateX(-4px) rotate(-5deg)}75%{transform:translateX(3px) rotate(3deg)}}
+.cartlink.shake{animation:shake .5s ease}
+
+/* product */
+.product{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;padding:70px 0}
+.visual{background:#fff;display:grid;place-items:center;min-height:520px}
+.visual img{width:86%;max-height:520px;object-fit:contain}
+.info{display:flex;flex-direction:column;justify-content:center;gap:18px}
+.kicker{font-size:12px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
+h1{font-family:Archivo Black,Cairo,sans-serif;font-size:clamp(34px,5vw,58px);line-height:1.05;direction:ltr}
+html[dir=rtl] h1{text-align:right}
+html[dir=ltr] h1{text-align:left}
+.price{font-size:27px;font-weight:800}
+.old{text-decoration:line-through;color:#777;font-size:16px;margin-inline-start:12px;font-weight:400}
+.desc{color:#bbb;font-size:15px;line-height:1.8}
+.label{font-size:13px;color:#aaa;margin-top:8px}
+.sizes{display:flex;gap:8px;flex-wrap:wrap}
+.sizes button{width:54px;height:45px;background:#000;border:1px solid #444;color:#fff;border-radius:3px;cursor:pointer}
+.sizes button.on{background:#fff;color:#000;border-color:#fff}
+.qtybox{display:flex;align-items:center;width:max-content;border:1px solid #444;border-radius:3px;direction:ltr}
+.qtybox button{width:48px;height:45px;background:#000;border:0;color:#fff;font-size:22px;cursor:pointer}
+.qtybox button:hover{background:#1a1a1a}
+.qtybox span{min-width:56px;text-align:center;font-weight:800;font-size:17px}
+.add{margin-top:8px;background:#fff;color:#000;border:0;padding:15px;font-weight:800;font-size:15px;border-radius:3px;cursor:pointer}
+.note{color:#777;font-size:12px}
+
+/* build your fit entry */
+.buildbox{margin-top:6px;display:flex;align-items:center;justify-content:space-between;gap:14px;text-align:start;width:100%;background:transparent;color:var(--fg);border:1px dashed #555;border-radius:4px;padding:16px 18px;cursor:pointer;transition:.25s var(--ease)}
+.buildbox:hover{border-color:#fff;background:#0b0b0b}
+.buildbox .bb-t{display:flex;flex-direction:column;gap:2px}
+.buildbox b{font-size:17px;font-weight:800}
+.buildbox small{color:#999;font-size:13px}
+.buildbox .bb-a{font-weight:800;font-size:14px;white-space:nowrap}
+
+/* modal */
+.mov{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:.25s;z-index:60}
+.mov.show{opacity:1;pointer-events:auto}
+.modal{position:fixed;left:50%;top:50%;width:min(1180px,calc(100% - 40px));height:min(90vh,840px);transform:translate(-50%,-46%) scale(.98);opacity:0;pointer-events:none;background:#070707;border:1px solid var(--line2);border-radius:8px;display:flex;flex-direction:column;z-index:70;transition:.3s var(--ease);overflow:hidden}
+.modal.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+.mback{position:absolute;top:20px;inset-inline-start:34px;z-index:6;width:46px;height:46px;border-radius:50%;background:#121212;border:1px solid #333;color:#fff;display:grid;place-items:center;cursor:pointer;transition:.2s}
+.mback:hover{background:#fff;color:#000;border-color:#fff}
+html[dir=rtl] .mback svg{transform:scaleX(-1)}
+.mtop{margin-inline-start:62px;min-height:46px;display:flex;flex-direction:column;justify-content:center;padding-bottom:6px}
+.mtop b{font-size:24px;font-weight:800;line-height:1.3}
+.mtop small{color:#999;font-size:14px}
+.mcontent{flex:1;min-height:0;display:grid;grid-template-columns:1fr}
+.modal.has-fit .mcontent{grid-template-columns:1fr 370px}
+.mbody{overflow-y:auto;padding:20px 34px 34px;min-height:0}
+.mbody section{padding:26px 0 18px;border-bottom:1px solid var(--line)}
+.mbody section:last-child{border-bottom:0}
+.mlabel{font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:#ddd;font-weight:800;margin-bottom:18px}
+html[dir=rtl] .mlabel{letter-spacing:0;font-size:19px;text-transform:none}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+.opt{position:relative;display:flex;flex-direction:column;text-align:start;background:#000;color:#fff;border:1px solid #2a2a2a;border-radius:6px;overflow:hidden;cursor:pointer;padding:0;transition:.2s}
+.opt:hover{border-color:#777;transform:translateY(-2px)}
+.opt.on{border-color:#fff;box-shadow:0 0 0 1px #fff}
+.opic{background:#fff;aspect-ratio:1/1;display:grid;place-items:center}
+.opic img{width:82%;height:82%;object-fit:contain}
+.oname{padding:14px 16px 0;font-weight:700;font-size:15px;direction:ltr;text-align:start;font-family:'Archivo Black',Cairo,sans-serif;text-transform:uppercase;letter-spacing:-.01em}
+.oprice{padding:4px 16px 16px;color:#aaa;font-size:15px}
+.ock{position:absolute;top:12px;inset-inline-end:12px;width:30px;height:30px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center;font-style:normal;font-size:16px;font-weight:800}
+.szlabel{font-size:14px;color:#bbb;margin:24px 0 12px}
+.msizes{gap:10px;margin-bottom:14px}
+.msizes button{width:66px;height:52px;font-size:16px;font-weight:600}
+.mfoot{padding:28px;border-inline-start:1px solid var(--line);display:none;flex-direction:column;gap:14px;background:#050505;overflow-y:auto;min-height:0}
+.mtitle{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#bbb;font-weight:800}
+html[dir=rtl] .mtitle{letter-spacing:0;font-size:17px;text-transform:none}
+.srow{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)}
+.sim{width:64px;height:64px;background:#fff;border-radius:4px;display:grid;place-items:center;flex:none}
+.sim img{width:84%;height:84%;object-fit:contain}
+.sinf{flex:1;min-width:0}
+.sinf b{display:block;font-size:14px;direction:ltr;text-align:start;font-family:'Archivo Black',Cairo,sans-serif;text-transform:uppercase}
+.sinf small{color:#999;font-size:13px}
+.sprice{font-weight:700;font-size:15px}
+.sslot{border:1px dashed #3a3a3a;border-radius:4px;padding:22px 14px;text-align:center;color:#777;font-size:14px}
+.mrow{display:flex;justify-content:space-between;gap:16px;font-size:15px;color:#bbb}
+.mrow.save{color:#fff}
+.mrow.tot{font-size:24px;font-weight:800;color:#fff;padding-top:14px;border-top:1px solid var(--line2)}
+.mhint{font-size:13px;color:#888;line-height:1.7}
+.mfoot .add{margin-top:auto;padding:18px;font-size:17px}
+.modal.has-fit .mfoot{display:flex}
+.mfull{display:flex;flex-direction:column;gap:14px}
+.mcompact{display:none}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+.mfoot.fresh{animation:rise .35s var(--ease)}
+
+.toast{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom,0px));left:50%;transform:translate(-50%,140%);opacity:0;visibility:hidden;pointer-events:none;background:#fff;color:#000;padding:12px 24px;border-radius:99px;font-weight:700;font-size:14px;white-space:nowrap;box-shadow:0 12px 34px rgba(0,0,0,.55);transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .4s ease,visibility 0s linear .55s;z-index:100}
+.toast.show{transform:translate(-50%,0);opacity:1;visibility:visible;transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .35s ease,visibility 0s}
+
+@media(prefers-reduced-motion:reduce){.cartlink.shake{animation:none}.modal,.mov{transition:none}}
+@media(max-width:760px){.product{grid-template-columns:1fr;gap:30px;padding:35px 0}.visual{min-height:360px}.visual img{max-height:360px}.top{height:56px}.top img{height:24px}}
+@media(max-width:900px){
+  .modal.has-fit .mcontent{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto}
+  .mfoot{border-inline-start:0;border-top:1px solid var(--line);padding:12px 16px;gap:14px;flex-direction:row;align-items:center;overflow:visible}
+  .modal.has-fit .mfoot{display:flex}
+  .mfull{display:none}
+  .mcompact{display:flex;flex-direction:column;line-height:1.25;flex:1;min-width:0}
+  .mcompact small{color:#9a9a9a;font-size:12px}
+  .mcompact b{font-size:20px}
+  .mfoot .add{margin:0;padding:14px 18px;font-size:15px;white-space:nowrap;flex:none}
+}
+@media(max-width:700px){.modal{width:100%;height:100%;left:0;top:0;border-radius:0;border:0;transform:translateY(24px)}.modal.show{transform:none}.mback{top:14px;inset-inline-start:16px;width:42px;height:42px}.mtop{margin-inline-start:56px;min-height:42px}.mtop b{font-size:20px}.mbody{padding:14px 18px 24px}.opts{grid-template-columns:repeat(2,1fr);gap:12px}}
+@media(max-width:560px){.back .bt{display:none}.back{padding:8px 12px}.tools{gap:8px}.cartlink{padding:8px 14px}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div class="mov" id="mov"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* خصم الطقم بالجنيه — لازم يساوي bundleDiscount في index.html / EGP off per tee+pants pair, keep equal to index.html */
+const BUNDLE_DISCOUNT = 50;
+const SIZES = ["S","M","L","XL"];
+
+const T = {
+  ar:{
+    back:"الرجوع للمنتجات", cart:"السلة", size:"المقاس", qty:"الكمية", add:"أضف للسلة",
+    note:"الدفع عند الاستلام · الشحن حسب المحافظة", pick:"اختار المقاس الأول", added:"اتضاف للسلة ✓", cur:"ج.م",
+    build:"ابني طقمك", buildSub:"اختار تيشرت وبنطلون بنفسك ووفّر", close:"إغلاق",
+    tees:"التيشرتات", pants:"البناطيل", sizeOf:"مقاس", disc:"خصم الطقم", fitTotal:"سعر الطقم",
+    addFit:"أضف الطقم للسلة", pickBoth:"اختار تيشرت وبنطلون ومقاس كل واحد", yourFit:"طقمك", pickTee:"اختار تيشرت", pickPants:"اختار بنطلون", pickSize:"اختار المقاس", langBtn:"EN"
+  },
+  en:{
+    back:"Back to shop", cart:"Cart", size:"Size", qty:"Quantity", add:"Add to cart",
+    note:"Cash on delivery · Shipping by governorate", pick:"Pick a size first", added:"Added to cart ✓", cur:"EGP",
+    build:"Build your fit", buildSub:"Pick your own tee and pants and save", close:"Close",
+    tees:"T-shirts", pants:"Pants", sizeOf:"Size for", disc:"Bundle discount", fitTotal:"Fit price",
+    addFit:"Add the fit to cart", pickBoth:"Pick a tee, pants and a size for each", yourFit:"Your fit", pickTee:"Pick a T-shirt", pickPants:"Pick pants", pickSize:"Pick a size", langBtn:"عربي"
+  }
+};
+
+const products = [
+  {id:"bat", category:"tshirts", name:"Bat T-shirt", price:220, oldPrice:300, img:"bat.png", color:"Black", cat:"T-SHIRT",
+    desc:{ar:"تيشرت كومبريشن أسود بطباعة بات بيضاء.", en:"Black compression tee with a white bat print."}},
+  {id:"spider", category:"tshirts", name:"Spider T-shirt", price:220, oldPrice:300, img:"spider.png", color:"Black", cat:"T-SHIRT",
+    desc:{ar:"تيشرت كومبريشن أسود بطباعة سبايدر بيضاء.", en:"Black compression tee with a white spider print."}},
+  {id:"black-sweatpants", category:"pants", name:"Black Sweatpants", price:480, oldPrice:550, img:"black-sweatpants.jpg", color:"Black", cat:"PANTS",
+    desc:{ar:"Black Sweatpants من FLEXIN.", en:"Black Sweatpants by FLEXIN."}},
+  {id:"gray-sweatpants", category:"pants", name:"Gray Sweatpants", price:480, oldPrice:550, img:"gray-sweatpants.jpg", color:"Gray", cat:"PANTS",
+    desc:{ar:"Gray Sweatpants من FLEXIN.", en:"Gray Sweatpants by FLEXIN."}}
+];
+const byId = id => products.find(x => x.id === id);
+
+let lang = "ar";
+try { lang = localStorage.getItem("flexin_lang") === "en" ? "en" : "ar"; } catch (e) {}
+const t = k => T[lang][k];
+const fmt = n => n.toLocaleString(lang === "ar" ? "ar-EG" : "en-US") + " " + t("cur");
+
+const pid = new URLSearchParams(location.search).get("p");
+const p = byId(pid) || products[0];
+
+let size = "", qty = 1, modalOpen = false;
+const fit = { top: null, bottom: null, ts: "", bs: "" };
+if (p.category === "tshirts") fit.top = p.id; else fit.bottom = p.id;   // the product being viewed starts selected
+
+/* cart storage (shared with index.html) */
+const readCart = () => { try { return JSON.parse(localStorage.getItem("flexin_cart") || "[]"); } catch (e) { return []; } };
+const writeCart = c => { try { localStorage.setItem("flexin_cart", JSON.stringify(c)); } catch (e) {} };
+const cartCount = () => readCart().reduce((a, c) => a + c.qty, 0);
+function addItem(cart, id, sz, n){
+  const color = byId(id).color;
+  const f = cart.find(x => x.id === id && x.size === sz && x.color === color);
+  f ? f.qty += n : cart.push({ id, size: sz, color, qty: n });
+}
+const updateCount = () => { const el = document.getElementById("cc"); if (el) el.textContent = cartCount(); };
+
+/* click sound + haptic + cart shake */
+let _ac;
+function feedback(){
+  try {
+    _ac = _ac || new (window.AudioContext || window.webkitAudioContext)();
+    if (_ac.state === "suspended") _ac.resume();
+    const tm = _ac.currentTime;
+    // light chime: two soft sine notes (E6 then B6) with a quick decay
+    [[1318.5, 0], [1975.5, .08]].forEach(([f, dl]) => {
+      const o = _ac.createOscillator(), g = _ac.createGain(), st = tm + dl;
+      o.type = "sine"; o.frequency.value = f;
+      g.gain.setValueAtTime(.0001, st); g.gain.exponentialRampToValueAtTime(.15, st + .012); g.gain.exponentialRampToValueAtTime(.0001, st + .5);
+      o.connect(g); g.connect(_ac.destination); o.start(st); o.stop(st + .55);
+    });
+  } catch (e) {}
+  try { navigator.vibrate && navigator.vibrate(18); } catch (e) {}
+  const c = document.getElementById("cartLink");
+  if (c) { c.classList.remove("shake"); void c.offsetWidth; c.classList.add("shake"); }
+}
+
+const unlockAudio = () => { try { _ac = _ac || new (window.AudioContext || window.webkitAudioContext)(); if (_ac.state === "suspended") _ac.resume(); } catch (e) {} };
+document.addEventListener("pointerdown", unlockAudio, { once: true });
+
+function toast(m){
+  const el = document.getElementById("toast");
+  el.textContent = m; el.classList.add("show");
+  clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("show"), 1800);
+}
+
+/* page */
+function render(){
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.title = "FLEXIN — " + p.name;
+  document.getElementById("app").innerHTML = `
+    <header class="top">
+      <a href="index.html"><img src="flexin-logo.png" alt="FLEXIN"></a>
+      <div class="tools">
+        <a class="back" href="index.html#products">←<span class="bt"> ${t("back")}</span></a>
+        <button class="langbtn" id="lang" type="button">${t("langBtn")}</button>
+        <a class="cartlink" id="cartLink" href="index.html#cart">${t("cart")} <b id="cc">${cartCount()}</b></a>
+      </div>
+    </header>
+    <main class="product">
+      <section class="visual"><img src="${p.img}" alt="${p.name}"></section>
+      <section class="info">
+        <div class="kicker">${p.cat}</div>
+        <h1>${p.name}</h1>
+        <div class="price">${fmt(p.price)} <span class="old">${fmt(p.oldPrice)}</span></div>
+        <p class="desc">${p.desc[lang]}</p>
+        <div class="label">${t("size")}</div>
+        <div class="sizes">${SIZES.map(s => `<button type="button" data-s="${s}" class="${s === size ? "on" : ""}">${s}</button>`).join("")}</div>
+        <div class="label">${t("qty")}</div>
+        <div class="qtybox"><button type="button" id="qm" aria-label="-">−</button><span id="qv">${qty}</span><button type="button" id="qp" aria-label="+">+</button></div>
+        <button class="add" id="add" type="button">${t("add")}</button>
+        <div class="note">${t("note")}</div>
+        <button class="buildbox" id="buildOpen" type="button">
+          <span class="bb-t"><b>${t("build")}</b><small>${t("buildSub")} ${fmt(BUNDLE_DISCOUNT)}</small></span>
+          <span class="bb-a">${t("build")} ${lang === "ar" ? "‹" : "›"}</span>
+        </button>
+      </section>
+    </main>`;
+  if (modalOpen) renderModal();
+}
+
+/* build your fit */
+function optCard(x, key){
+  const on = fit[key] === x.id;
+  return `<button type="button" class="opt${on ? " on" : ""}" data-k="${key}" data-id="${x.id}" aria-pressed="${on}">
+    <span class="opic"><img src="${x.img}" alt="${x.name}" loading="lazy"></span>
+    <span class="oname">${x.name}</span><span class="oprice">${fmt(x.price)}</span>${on ? '<i class="ock">✓</i>' : ""}
+  </button>`;
+}
+function sizesRow(key, sk){
+  const x = byId(fit[key]);
+  if (!x) return "";
+  return `<div class="szlabel">${t("sizeOf")} ${x.name}</div>
+    <div class="sizes msizes">${SIZES.map(s => `<button type="button" data-fs="${sk}" data-s="${s}" class="${fit[sk] === s ? "on" : ""}">${s}</button>`).join("")}</div>`;
+}
+function renderModal(){
+  const m = document.getElementById("modal");
+  const old = m.querySelector(".mbody"), st = old ? old.scrollTop : 0;
+  const tees = products.filter(x => x.category === "tshirts"), pants = products.filter(x => x.category === "pants");
+  const a = byId(fit.top), b = byId(fit.bottom), both = a && b;
+  const slot = (x, sz, ph) => x
+    ? `<div class="srow"><span class="sim"><img src="${x.img}" alt=""></span><span class="sinf"><b>${x.name}</b><small>${sz ? t("size") + " " + sz : t("pickSize")}</small></span><span class="sprice">${fmt(x.price)}</span></div>`
+    : `<div class="sslot">${ph}</div>`;
+  const wasFit = m.classList.contains("has-fit");
+  m.classList.toggle("has-fit", !!both);
+  const arrow = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>';
+  const total = both ? a.price + b.price - BUNDLE_DISCOUNT : 0;
+  m.innerHTML = `
+    <button type="button" class="mback" id="mclose" aria-label="${t("close")}">${arrow}</button>
+    <div class="mcontent">
+      <div class="mbody">
+        <div class="mtop"><b>${t("build")}</b><small>${t("buildSub")} ${fmt(BUNDLE_DISCOUNT)}</small></div>
+        <section><div class="mlabel">${t("tees")}</div><div class="opts">${tees.map(x => optCard(x, "top")).join("")}</div>${sizesRow("top", "ts")}</section>
+        <section><div class="mlabel">${t("pants")}</div><div class="opts">${pants.map(x => optCard(x, "bottom")).join("")}</div>${sizesRow("bottom", "bs")}</section>
+      </div>
+      <div class="mfoot${both && !wasFit ? " fresh" : ""}">
+        <div class="mfull">
+          <div class="mtitle">${t("yourFit")}</div>
+          ${slot(a, fit.ts, t("pickTee"))}
+          ${slot(b, fit.bs, t("pickPants"))}
+          ${both ? `<div class="mrow save"><span>${t("disc")}</span><span>-${fmt(BUNDLE_DISCOUNT)}</span></div>
+                    <div class="mrow tot"><span>${t("fitTotal")}</span><span>${fmt(total)}</span></div>` : ""}
+        </div>
+        <div class="mcompact"><small>${t("fitTotal")} · ${t("disc")} -${fmt(BUNDLE_DISCOUNT)}</small><b>${fmt(total)}</b></div>
+        <button type="button" class="add" id="addFit">${t("addFit")}</button>
+      </div>
+    </div>`;
+  const nb = m.querySelector(".mbody"); if (nb) nb.scrollTop = st;
+}
+function openModal(){
+  modalOpen = true; renderModal();
+  document.getElementById("mov").classList.add("show");
+  const m = document.getElementById("modal"); m.classList.add("show"); m.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+function closeModal(){
+  modalOpen = false;
+  document.getElementById("mov").classList.remove("show");
+  const m = document.getElementById("modal"); m.classList.remove("show"); m.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+document.addEventListener("click", e => {
+  const g = e.target;
+  if (g.closest("#lang")) {
+    lang = lang === "ar" ? "en" : "ar";
+    try { localStorage.setItem("flexin_lang", lang); } catch (_) {}
+    render(); return;
+  }
+  const sz = g.closest("#app .sizes button");
+  if (sz) {
+    size = sz.dataset.s;
+    document.querySelectorAll("#app .sizes button").forEach(b => b.classList.toggle("on", b === sz));
+    return;
+  }
+  if (g.closest("#qm")) { qty = Math.max(1, qty - 1); document.getElementById("qv").textContent = qty; return; }
+  if (g.closest("#qp")) { qty = Math.min(20, qty + 1); document.getElementById("qv").textContent = qty; return; }
+  if (g.closest("#add")) {
+    if (!size) return toast(t("pick"));
+    const cart = readCart(); addItem(cart, p.id, size, qty); writeCart(cart);
+    updateCount(); feedback(); toast(t("added")); return;
+  }
+  if (g.closest("#buildOpen")) return openModal();
+  if (g.closest("#mclose") || g.id === "mov") return closeModal();
+  const opt = g.closest("#modal .opt");
+  if (opt) { fit[opt.dataset.k] = opt.dataset.id; renderModal(); return; }
+  const fs = g.closest("#modal [data-fs]");
+  if (fs) { fit[fs.dataset.fs] = fs.dataset.s; renderModal(); return; }
+  if (g.closest("#addFit")) {
+    if (!fit.top || !fit.bottom || !fit.ts || !fit.bs) return toast(t("pickBoth"));
+    const cart = readCart();
+    addItem(cart, fit.top, fit.ts, 1); addItem(cart, fit.bottom, fit.bs, 1);
+    writeCart(cart); closeModal(); updateCount(); feedback(); toast(t("added"));
+  }
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape" && modalOpen) closeModal(); });
+
+render();
+</script>
+</body>
+</html>
